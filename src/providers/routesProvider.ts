@@ -288,6 +288,16 @@ export class RoutesProvider implements vscode.TreeDataProvider<RouteItem> {
 
     // Check each file in the directory
     for (const file of files) {
+      // Detect remote function files: {name}.remote.ts / {name}.remote.js
+      if (/\.remote\.[tj]s$/.test(file)) {
+        fileInfos.push({
+          filePath: path.join(dir, file),
+          fileType: "remote",
+          resetInfo: null,
+        });
+        continue;
+      }
+
       // Skip non-route files
       if (!file.startsWith("+")) {
         continue;

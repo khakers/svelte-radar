@@ -80,6 +80,9 @@ export class RouteItem extends vscode.TreeItem {
         if (fileName.includes("+server.")) {
           icon = "server-process";
           color = "charts.orange";
+        } else if (/\.remote\.[tj]s$/.test(fileName)) {
+          icon = "radio-tower";
+          color = "charts.purple";
         } else if (fileName.includes(".server.")) {
           icon = "server";
           color = "charts.yellow"; // server-side files get yellow
@@ -196,11 +199,12 @@ export class RouteItem extends vscode.TreeItem {
     // Determine file type based on filename first
     const fileName = this.filePath ? basename(this.filePath) : "";
 
-    // Add route type only for actual pages (not for layouts, servers, etc)
+    // Add route type only for actual pages (not for layouts, servers, remotes, etc)
     if (
       this.routeType !== "divider" &&
       !fileName.includes("+layout.") &&
-      !fileName.includes("+server.")
+      !fileName.includes("+server.") &&
+      !/\.remote\.[tj]s$/.test(fileName)
     ) {
       const hasMultipleTypes =
         (this.routePath?.match(/\[[^\]]+\]/g) ?? []).length > 1;
@@ -214,6 +218,8 @@ export class RouteItem extends vscode.TreeItem {
     if (fileName) {
       if (fileName.includes("+server.")) {
         parts.push("[api]");
+      } else if (/\.remote\.[tj]s$/.test(fileName)) {
+        parts.push("[remote]");
       } else if (
         fileName.includes("+page.server.") ||
         fileName.includes("+layout.server.")
