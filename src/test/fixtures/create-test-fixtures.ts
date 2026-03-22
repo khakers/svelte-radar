@@ -114,6 +114,11 @@ export async function createTestFixtures() {
     await createFile("about/+layout.js");
     await createFile("dashboard/+page.server.js");
 
+    // Remote function files
+    await createFile("about/greet.remote.ts");
+    await createFile("dashboard/analytics.remote.js");
+    await createFile("api/posts/send.remote.ts");
+
     console.log("Test fixtures created successfully!");
     console.log("Fixtures location:", fixturesDir);
   } catch (error) {

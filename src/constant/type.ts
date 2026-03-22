@@ -1,6 +1,6 @@
 export type RouteType = 'static' | 'dynamic' | 'rest' | 'optional' | 'error' | 'layout' | 'divider' | 'group' | 'matcher' | 'spacer';
 
-export type FileType = 'page' | 'server' | 'layout' | 'error' | 'pageServer' | 'layoutServer' | 'pageClient' | 'layoutClient';
+export type FileType = 'page' | 'server' | 'layout' | 'error' | 'pageServer' | 'layoutServer' | 'pageClient' | 'layoutClient' | 'remote';
 
 export interface RouteColors {
     static: string;
